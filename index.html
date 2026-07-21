@@ -2,47 +2,84 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Verlobung — Gülnur & Yasin</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --bg-main: #0c0a09;
+            --surface-card: rgba(22, 19, 17, 0.75);
+            --border-light: rgba(229, 200, 159, 0.18);
+            --border-focus: rgba(229, 200, 159, 0.4);
+            --accent-gold: #e5c89f;
+            --accent-gold-light: #f5e6d0;
+            --gold-gradient: linear-gradient(135deg, #f5e6d0 0%, #e5c89f 50%, #b8986c 100%);
+            --text-primary: #f5f5f4;
+            --text-secondary: #a8a29e;
+            --wax-red: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #0b0e14;
-            color: #f0f2f5;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
             text-align: center;
-            line-height: 1.6;
-            padding-bottom: 60px;
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(229, 200, 159, 0.07) 0%, transparent 60%),
+                radial-gradient(circle at 50% 100%, rgba(229, 200, 159, 0.04) 0%, transparent 60%);
+        }
+
+        .serif {
+            font-family: 'Playfair Display', serif;
         }
 
         .container {
-            max-width: 440px;
+            max-width: 420px;
             margin: 0 auto;
-            padding: 20px 20px;
+            padding: 0 20px 80px 20px;
         }
 
-        /* UMSCHLAG ANIMATION */
-        .hero {
-            padding: 30px 0 10px 0;
+        /* --- HERO & ELEGANT ENVELOPE --- */
+        .hero-section {
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            perspective: 1200px;
+            padding-top: 20px;
         }
 
-        .envelope-wrapper {
+        .hero-title {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .envelope-container {
             position: relative;
-            width: 280px;
-            height: 190px;
+            width: 300px;
+            height: 200px;
             cursor: pointer;
             margin: 20px 0;
         }
@@ -51,41 +88,43 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #121721;
-            border-radius: 12px;
-            border: 1px solid rgba(226, 195, 145, 0.4);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            background: #151210;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9);
         }
 
-        .card-inside {
+        .invitation-card {
             position: absolute;
-            top: 8px;
+            top: 10px;
             left: 12px;
             right: 12px;
-            height: 170px;
-            background: #181f2c;
-            border: 1px solid rgba(226, 195, 145, 0.5);
-            border-radius: 8px;
+            height: 180px;
+            background: #1c1815;
+            border: 1px solid var(--border-focus);
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.8s ease;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 2;
-            padding: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
-        .card-inside h3 {
-            font-family: 'Cormorant Garamond', serif;
+        .invitation-card h3 {
             font-size: 1.5rem;
-            color: #e2c391;
-            margin: 5px 0;
+            color: var(--accent-gold);
+            font-weight: 400;
+            margin: 4px 0;
+            letter-spacing: 1px;
         }
 
-        .card-inside p {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: #94a3b8;
+        .invitation-card p {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--text-secondary);
             text-transform: uppercase;
         }
 
@@ -95,11 +134,11 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 140px solid #141a26;
-            border-right: 140px solid #141a26;
-            border-top: 90px solid transparent;
-            border-bottom: 100px solid #1a2232;
-            border-radius: 0 0 12px 12px;
+            border-left: 150px solid #181412;
+            border-right: 150px solid #181412;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid #1f1a17;
+            border-radius: 0 0 8px 8px;
             z-index: 3;
         }
 
@@ -109,180 +148,34 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-top: 105px solid #1c2536;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #231e1a;
             transform-origin: top;
-            transition: transform 0.7s ease;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 4;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
         }
 
-        .seal {
+        .wax-seal {
             position: absolute;
-            top: 80px;
+            top: 85px;
             left: 50%;
             transform: translateX(-50%);
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, #8b1d1d 0%, #520c0c 100%);
+            background: var(--wax-red);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 5;
-            border: 1px solid rgba(226, 195, 145, 0.5);
+            border: 1px solid rgba(229, 200, 159, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.2);
             transition: all 0.5s ease;
         }
 
-        .seal span {
-            font-family: 'Cormorant Garamond', serif;
-            color: #f4e6d0;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        .envelope-wrapper.open .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
-
-        .envelope-wrapper.open .seal {
-            opacity: 0;
-            transform: translateX(-50%) scale(0.2);
-        }
-
-        .envelope-wrapper.open .card-inside {
-            transform: translateY(-80px);
-        }
-
-        /* INHALTS-BOXEN */
-        .card {
-            background: rgba(22, 27, 38, 0.85);
-            border: 1px solid rgba(226, 195, 145, 0.25);
-            border-radius: 16px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
-            color: #e2c391;
-            margin-bottom: 8px;
-        }
-
-        p {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        .gold-text {
-            color: #e2c391;
-            font-weight: 600;
-        }
-
-        .img-container {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 15px 0;
-            border: 1px solid rgba(226, 195, 145, 0.3);
-            background: #151821;
-        }
-
-        .img-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #f4e6d0 0%, #e2c391 50%, #b89358 100%);
-            color: #0d1117;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-top: 15px;
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: #ffffff;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-
-        <div class="hero">
-            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
-                <div class="envelope-back"></div>
-                <div class="card-inside">
-                    <p>Einladung zur Verlobung</p>
-                    <h3>Gülnur & Yasin</h3>
-                    <p style="color: #e2c391; font-size: 0.65rem; margin-top: 6px;">November 2026</p>
-                </div>
-                <div class="envelope-pocket"></div>
-                <div class="envelope-flap"></div>
-                <div class="seal"><span>G&Y</span></div>
-            </div>
-            <p style="color: #e2c391; font-size: 0.75rem; letter-spacing: 2px; margin-top: 10px;">▼ TIPPEN ZUM ÖFFNEN ▼</p>
-        </div>
-
-        <div class="card">
-            <h2>Hoş Geldiniz</h2>
-            <p style="font-style: italic; color: #e2c391; font-size: 0.85rem; margin-bottom: 10px;">Herzlich Willkommen</p>
-            <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
-        </div>
-
-        <div class="card">
-            <h2>Wann</h2>
-            <p class="gold-text" style="font-size: 1.4rem; font-family: 'Cormorant Garamond', serif;">November 2026</p>
-            <p style="font-size: 0.85rem; margin-top: 4px;">Das genaue Datum geben wir in Kürze bekannt.</p>
-        </div>
-
-        <div class="card">
-            <h2>Wo</h2>
-            <p class="gold-text">Location Badbergen</p>
-            
-            <div class="img-container">
-                <img src="IMG_9563.JPG" 
-                     onerror="this.onerror=null; this.src='IMG_9563.jpg';" 
-                     alt="Location Badbergen">
-            </div>
-
-            <p>Vortmannsweg 23<br>49635 Badbergen</p>
-            <a href="https://maps.google.com/?q=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn">📍 In Google Maps öffnen</a>
-        </div>
-
-        <div class="card">
-            <h2>Rückmeldung</h2>
-            <p>Bitte gebt uns Bescheid, ob ihr dabei seid!</p>
-            <a href="https://wa.me/?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne!" target="_blank" class="btn btn-whatsapp">💬 Per WhatsApp zusagen</a>
-        </div>
-
-        <div style="padding: 20px 0; color: #94a3b8; font-size: 0.85rem;">
-            <p>Wir freuen uns auf euch</p>
-            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #e2c391; margin-top: 4px;">Gülnur & Yasin</p>
-        </div>
-
-    </div>
-
-    <script>
-        function openEnvelope() {
-            var env = document.getElementById('envelope');
-            if (env) {
-                env.classList.add('open');
-            }
-        }
-    </script>
-</body>
-</html>
+        .wax-seal span {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold-light);
+            font-weight: 6
