@@ -1,373 +1,393 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verlobung — Gülnur & Yasin</title>
-    
-    <!-- Luxus Typografie -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #0b0e14;
-            --card-bg: rgba(22, 27, 38, 0.75);
-            --champagne: #e2c391;
-            --champagne-light: #f4e6d0;
-            --champagne-gradient: linear-gradient(135deg, #f4e6d0 0%, #e2c391 50%, #b89358 100%);
-            --text-main: #f0f2f5;
-            --text-sub: #94a3b8;
-            --wax-red: linear-gradient(135deg, #8b1d1d 0%, #520c0c 100%);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
+<title>Gülnur & Yasin | Verlobung</title>
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            text-align: center;
-            overflow-x: hidden;
-            line-height: 1.8;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(226, 195, 145, 0.08) 0%, transparent 70%),
-                radial-gradient(circle at 50% 100%, rgba(226, 195, 145, 0.05) 0%, transparent 70%);
-        }
+<meta name="description" content="Einladung zur Verlobung von Gülnur & Yasin">
 
-        h1, h2, h3, .serif {
-            font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 1.5px;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        .container {
-            max-width: 440px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
-        /* --- HERO & UMSCHLAG --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-        }
 
-        .envelope-wrapper {
-            position: relative;
-            width: 290px;
-            height: 195px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
+<style>
 
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #121721;
-            border-radius: 12px;
-            border: 1px solid rgba(226, 195, 145, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-        }
+:root{
+    --gold:#d8b36a;
+    --gold-light:#f5e3b3;
+    --dark:#080808;
+    --card:#111111;
+    --text:#f7f4ee;
+}
 
-        .card-inside {
-            position: absolute;
-            top: 8px;
-            left: 12px;
-            right: 12px;
-            height: 175px;
-            background: #181f2c;
-            border: 1px solid rgba(226, 195, 145, 0.4);
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 2;
-            padding: 20px;
-        }
 
-        .card-inside h3 {
-            font-size: 1.4rem;
-            color: var(--champagne);
-            font-weight: 600;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .card-inside p {
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--text-sub);
-            text-transform: uppercase;
-            margin-top: 4px;
-        }
 
-        .envelope-pocket {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 145px solid #141a26;
-            border-right: 145px solid #141a26;
-            border-top: 95px solid transparent;
-            border-bottom: 100px solid #1a2232;
-            border-radius: 0 0 12px 12px;
-            z-index: 3;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 145px solid transparent;
-            border-right: 145px solid transparent;
-            border-top: 110px solid #1c2536;
-            transform-origin: top;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 4;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-        }
 
-        .seal {
-            position: absolute;
-            top: 82px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 48px;
-            height: 48px;
-            background: var(--wax-red);
-            border-radius: 50%;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            border: 1px solid rgba(226, 195, 145, 0.3);
-            transition: all 0.5s ease;
-        }
+body{
 
-        .seal span {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--champagne-light);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
+    background:
+    radial-gradient(circle at top,
+    rgba(216,179,106,.15),
+    transparent 40%),
+    #080808;
 
-        /* Open State Animation */
-        .envelope-wrapper.open .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
+    color:white;
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
+}
 
-        .envelope-wrapper.open .seal {
-            opacity: 0;
-            transform: translateX(-50%) scale(0.4);
-        }
 
-        .envelope-wrapper.open .card-inside {
-            transform: translateY(-100px);
-        }
+body:before{
 
-        .scroll-hint {
-            margin-top: 50px;
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--champagne);
-            opacity: 0.7;
-            animation: pulse 2s infinite;
-        }
+content:"";
+position:fixed;
+inset:0;
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: translateY(0); }
-            50% { opacity: 0.9; transform: translateY(-4px); }
-        }
+background-image:
+radial-gradient(#d8b36a 1px,transparent 1px);
 
-        /* --- CONTENT SECTIONS --- */
-        section {
-            padding: 50px 0;
-        }
+background-size:80px 80px;
+opacity:.08;
 
-        .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 195, 145, 0.15);
-            border-radius: 16px;
-            padding: 32px 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
+pointer-events:none;
 
-        h2 {
-            font-size: 1.8rem;
-            color: var(--champagne);
-            margin-bottom: 12px;
-            font-weight: 400;
-        }
+}
 
-        p {
-            color: var(--text-sub);
-            font-size: 0.92rem;
-            font-weight: 300;
-        }
 
-        .highlight-text {
-            background: var(--champagne-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-        }
 
-        /* LOCATION BILD FEIN */
-        .img-container {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 20px 0;
-            border: 1px solid rgba(226, 195, 145, 0.2);
-        }
+h1,h2,h3{
 
-        .img-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+font-family:'Cormorant Garamond',serif;
 
-        /* BUTTONS */
-        .btn {
-            display: inline-block;
-            width: 100%;
-            padding: 16px;
-            background: var(--champagne-gradient);
-            color: #0d1117;
-            text-decoration: none;
-            font-weight: 500;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-top: 10px;
-            box-shadow: 0 8px 20px rgba(226, 195, 145, 0.15);
-            transition: transform 0.2s ease;
-        }
+}
 
-        .btn:active {
-            transform: scale(0.98);
-        }
 
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: #ffffff;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2);
-        }
 
-        footer {
-            padding: 40px 0 60px;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-        }
-    </style>
-</head>
-<body>
+.container{
 
-    <div class="container">
+max-width:480px;
+margin:auto;
+padding:0 25px;
 
-        <!-- HERO UMSCHLAG -->
-        <div class="hero">
-            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
-                <div class="envelope-back"></div>
-                <div class="card-inside">
-                    <p>Einladung zur Verlobung</p>
-                    <h3>Gülnur & Yasin</h3>
-                    <p style="color: var(--champagne); font-size: 0.65rem; margin-top: 8px;">November 2026</p>
-                </div>
-                <div class="envelope-pocket"></div>
-                <div class="envelope-flap"></div>
-                <div class="seal"><span>G&Y</span></div>
-            </div>
-            <div class="scroll-hint">▼ Tippen zum Öffnen ▼</div>
-        </div>
+}
 
-        <!-- BEGRÜSSUNG -->
-        <section>
-            <div class="glass-card">
-                <h2>Hoş Geldiniz</h2>
-                <p style="font-style: italic; color: var(--champagne); font-size: 0.85rem; margin-bottom: 12px;">Herzlich Willkommen</p>
-                <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
-            </div>
-        </section>
 
-        <!-- DATUM -->
-        <section>
-            <div class="glass-card">
-                <h2>Wann</h2>
-                <p class="highlight-text serif" style="font-size: 1.6rem;">November 2026</p>
-                <p style="font-size: 0.8rem; margin-top: 6px;">Das genaue Datum sowie die Uhrzeit folgen in Kürze.</p>
-            </div>
-        </section>
 
-        <!-- LOCATION -->
-        <section>
-            <div class="glass-card">
-                <h2>Wo</h2>
-                <p class="highlight-text" style="font-size: 1.1rem;">Location Badbergen</p>
-                
-                <div class="img-container">
-                    <img src="IMG_9563.JPG" 
-                         onerror="this.onerror=null; this.src='IMG_9563.jpg'; if(!this.src.includes('jpeg')) this.src='IMG_9563.jpeg';" 
-                         alt="Location Badbergen">
-                </div>
+/* HERO */
 
-                <p>Vortmannsweg 23<br>49635 Badbergen</p>
-                <a href="https://maps.app.goo.gl/hjnbZYpBbDfLeYTR6?g_st=ic" target="_blank" class="btn">📍 In Google Maps öffnen</a>
-            </div>
-        </section>
 
-        <!-- RSPS / WHATSAPP -->
-        <section>
-            <div class="glass-card">
-                <h2>Rückmeldung</h2>
-                <p>Wir bitten euch um eine kurze Rückmeldung, ob ihr diesen besonderen Moment mit uns teilt.</p>
-                <a href="https://wa.me/DEINE_NUMMER?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne%20zu%20eurer%20Verlobung!" target="_blank" class="btn btn-whatsapp">💬 Per WhatsApp zusagen</a>
-            </div>
-        </section>
+.hero{
 
-        <!-- FOOTER -->
-        <footer>
-            <p>Wir freuen uns auf euch</p>
-            <p class="serif highlight-text" style="font-size: 1.4rem; margin-top: 4px;">Gülnur & Yasin</p>
-        </footer>
+height:100vh;
 
-    </div>
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 
-    <script>
-        let isOpen = false;
-        function openEnvelope() {
-            if (!isOpen) {
-                document.getElementById('envelope').classList.add('open');
-                isOpen = true;
-            }
-        }
+text-align:center;
 
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 10) {
-                openEnvelope();
-            }
-        });
-    </script>
-</body>
-</html>
+}
+
+
+.small-title{
+
+letter-spacing:5px;
+font-size:.7rem;
+color:#c9b27b;
+
+text-transform:uppercase;
+
+margin-bottom:25px;
+
+}
+
+
+.names{
+
+font-size:4rem;
+font-weight:400;
+line-height:1;
+
+background:
+linear-gradient(
+120deg,
+#fff,
+#d8b36a,
+#fff
+);
+
+-webkit-background-clip:text;
+color:transparent;
+
+}
+
+
+
+.subtitle{
+
+margin-top:25px;
+
+font-size:.9rem;
+color:#aaa;
+
+}
+
+
+
+.envelope{
+
+margin-top:70px;
+
+width:300px;
+height:190px;
+
+position:relative;
+
+cursor:pointer;
+
+perspective:1000px;
+
+}
+
+
+
+.base{
+
+position:absolute;
+inset:0;
+
+background:#161616;
+
+border-radius:10px;
+
+border:1px solid rgba(216,179,106,.4);
+
+box-shadow:
+0 40px 80px black;
+
+}
+
+
+
+.paper{
+
+position:absolute;
+
+width:260px;
+height:160px;
+
+background:#f8f1df;
+
+left:20px;
+top:15px;
+
+color:#111;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:1.8rem;
+
+transition:1s;
+
+z-index:2;
+
+}
+
+
+
+.flap{
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:0;
+height:0;
+
+border-left:150px solid transparent;
+border-right:150px solid transparent;
+border-top:100px solid #242424;
+
+transform-origin:top;
+
+transition:1s;
+
+z-index:4;
+
+}
+
+
+
+.seal{
+
+position:absolute;
+
+top:75px;
+left:50%;
+
+transform:translateX(-50%);
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+
+background:
+linear-gradient(135deg,#8d1f1f,#400000);
+
+border:2px solid #d8b36a;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family:'Cormorant Garamond';
+
+font-size:1.2rem;
+
+z-index:5;
+
+transition:.7s;
+
+}
+
+
+
+.envelope.open .flap{
+
+transform:rotateX(180deg);
+
+}
+
+
+
+.envelope.open .seal{
+
+opacity:0;
+transform:
+translateX(-50%)
+scale(.2);
+
+}
+
+
+
+.envelope.open .paper{
+
+transform:translateY(-80px);
+
+}
+
+
+
+.scroll{
+
+margin-top:50px;
+
+font-size:.7rem;
+letter-spacing:3px;
+
+color:#d8b36a;
+
+animation:float 2s infinite;
+
+}
+
+
+
+@keyframes float{
+
+50%{
+transform:translateY(-8px);
+}
+
+}
+
+
+
+/* SECTIONS */
+
+
+section{
+
+padding:80px 0;
+
+}
+
+
+
+.card{
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.05),
+rgba(255,255,255,.01)
+);
+
+border:
+
+1px solid rgba(216,179,106,.25);
+
+border-radius:25px;
+
+padding:35px 25px;
+
+backdrop-filter:blur(15px);
+
+box-shadow:
+0 30px 70px rgba(0,0,0,.5);
+
+}
+
+
+
+.title{
+
+font-size:2.3rem;
+
+color:var(--gold);
+
+margin-bottom:20px;
+
+}
+
+
+
+.text{
+
+color:#bbb;
+
+font-size:.95rem;
+
+line-height:1.8;
+
+}
+
+
+
+.gold{
+
+color:var(--gold);
+
+}
