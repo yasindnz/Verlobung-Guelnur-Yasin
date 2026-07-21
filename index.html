@@ -3,81 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verlobung - Gülnur & Yasin</title>
-    <!-- Elegant Font Imports -->
+    <title>Verlobung — Gülnur & Yasin</title>
+    
+    <!-- Luxus Typografie -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0b0b0b;
-            --card-bg: #141414;
-            --gold-primary: #d4af37;
-            --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa820a 100%);
-            --gold-light: #f7ebd0;
-            --text-color: #e5e5e5;
-            --text-muted: #999999;
-            --red-wax: #7a0c0c;
-            --red-wax-gradient: radial-gradient(circle at 30% 30%, #a81c1c, #680505);
+            --bg-dark: #0b0e14;
+            --card-bg: rgba(22, 27, 38, 0.75);
+            --champagne: #e2c391;
+            --champagne-light: #f4e6d0;
+            --champagne-gradient: linear-gradient(135deg, #f4e6d0 0%, #e2c391 50%, #b89358 100%);
+            --text-main: #f0f2f5;
+            --text-sub: #94a3b8;
+            --wax-red: linear-gradient(135deg, #8b1d1d 0%, #520c0c 100%);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             text-align: center;
             overflow-x: hidden;
-            line-height: 1.7;
+            line-height: 1.8;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(226, 195, 145, 0.08) 0%, transparent 70%),
+                radial-gradient(circle at 50% 100%, rgba(226, 195, 145, 0.05) 0%, transparent 70%);
         }
 
-        h1, h2, .gold-heading {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1.5px;
         }
 
-        .content-container {
-            max-width: 460px;
+        .container {
+            max-width: 440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* ----------------------------------
-           HERO & ENVELOPE STYLES
-        ---------------------------------- */
-        .hero-section {
+        /* --- HERO & UMSCHLAG --- */
+        .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            perspective: 1200px;
+            perspective: 1000px;
         }
 
-        .envelope-container {
+        .envelope-wrapper {
             position: relative;
-            width: 300px;
-            height: 200px;
+            width: 290px;
+            height: 195px;
             cursor: pointer;
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
-        .envelope-body {
+        .envelope-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #181818;
+            background: #121721;
+            border-radius: 12px;
+            border: 1px solid rgba(226, 195, 145, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .card-inside {
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            right: 12px;
+            height: 175px;
+            background: #181f2c;
+            border: 1px solid rgba(226, 195, 145, 0.4);
             border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.1);
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .card-inside h3 {
+            font-size: 1.4rem;
+            color: var(--champagne);
+            font-weight: 600;
+        }
+
+        .card-inside p {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            margin-top: 4px;
         }
 
         .envelope-pocket {
@@ -86,12 +118,12 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 150px solid #1c1c1c;
-            border-right: 150px solid #1c1c1c;
-            border-top: 100px solid transparent;
-            border-bottom: 100px solid #222222;
+            border-left: 145px solid #141a26;
+            border-right: 145px solid #141a26;
+            border-top: 95px solid transparent;
+            border-bottom: 100px solid #1a2232;
+            border-radius: 0 0 12px 12px;
             z-index: 3;
-            filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.5));
         }
 
         .envelope-flap {
@@ -100,291 +132,230 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 115px solid #252525;
+            border-left: 145px solid transparent;
+            border-right: 145px solid transparent;
+            border-top: 110px solid #1c2536;
             transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 4;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
         }
 
-        .wax-seal {
+        .seal {
             position: absolute;
-            top: 85px;
+            top: 82px;
             left: 50%;
             transform: translateX(-50%);
-            width: 52px;
-            height: 52px;
-            background: var(--red-wax-gradient);
+            width: 48px;
+            height: 48px;
+            background: var(--wax-red);
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 5;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            transition: transform 0.6s ease, opacity 0.4s ease;
+            border: 1px solid rgba(226, 195, 145, 0.3);
+            transition: all 0.5s ease;
         }
 
-        .wax-seal span {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-weight: 700;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+        .seal span {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--champagne-light);
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        .card-inside {
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            right: 15px;
-            height: 180px;
-            background: var(--card-bg);
-            border: 1px solid var(--gold-primary);
-            border-radius: 6px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            box-sizing: border-box;
-            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-            z-index: 2;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
-        .card-inside h3 {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-primary);
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
-
-        .card-inside p {
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .envelope-container.open .envelope-flap {
+        /* Open State Animation */
+        .envelope-wrapper.open .envelope-flap {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
-        .envelope-container.open .wax-seal {
+        .envelope-wrapper.open .seal {
             opacity: 0;
-            transform: translateX(-50%) scale(0.3) rotate(45deg);
+            transform: translateX(-50%) scale(0.4);
         }
 
-        .envelope-container.open .card-inside {
-            transform: translateY(-110px) scale(1.05);
+        .envelope-wrapper.open .card-inside {
+            transform: translateY(-100px);
         }
 
         .scroll-hint {
-            margin-top: 60px;
-            color: var(--gold-primary);
-            font-size: 0.75rem;
-            letter-spacing: 2px;
+            margin-top: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            animation: fadeInOut 2.5s infinite;
+            color: var(--champagne);
+            opacity: 0.7;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes fadeInOut {
+        @keyframes pulse {
             0%, 100% { opacity: 0.4; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-6px); }
+            50% { opacity: 0.9; transform: translateY(-4px); }
         }
 
-        /* ----------------------------------
-           CONTENT SECTIONS & LOCATION IMAGE
-        ---------------------------------- */
+        /* --- CONTENT SECTIONS --- */
         section {
-            padding: 60px 0;
-            position: relative;
+            padding: 50px 0;
         }
 
-        section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 1px;
-            background: var(--gold-gradient);
-            opacity: 0.4;
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 195, 145, 0.15);
+            border-radius: 16px;
+            padding: 32px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         h2 {
-            color: var(--gold-primary);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
+            color: var(--champagne);
+            margin-bottom: 12px;
             font-weight: 400;
         }
 
         p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: var(--text-sub);
+            font-size: 0.92rem;
             font-weight: 300;
         }
 
-        .gold-text {
-            background: var(--gold-gradient);
+        .highlight-text {
+            background: var(--champagne-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 600;
         }
 
-        /* LOCATION IMAGE STYLES */
-        .location-img-wrapper {
-            margin: 20px 0 25px 0;
+        /* LOCATION BILD FEIN */
+        .img-container {
+            width: 100%;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            margin: 20px 0;
+            border: 1px solid rgba(226, 195, 145, 0.2);
         }
 
-        .location-img {
+        .img-container img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.5s ease;
         }
 
-        .location-img-wrapper:hover .location-img {
-            transform: scale(1.03);
-        }
-
-        /* Buttons */
+        /* BUTTONS */
         .btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 14px 28px;
-            background: var(--gold-gradient);
-            color: #000000;
+            width: 100%;
+            padding: 16px;
+            background: var(--champagne-gradient);
+            color: #0d1117;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             border-radius: 30px;
             font-size: 0.85rem;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
-            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(226, 195, 145, 0.15);
+            transition: transform 0.2s ease;
         }
 
         .btn:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
         }
 
-        /* Galerie Platzhalter */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .gallery-placeholder {
-            width: 100%;
-            height: 130px;
-            background: #151515;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555555;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2);
         }
 
         footer {
-            padding: 40px 0 60px 0;
+            padding: 40px 0 60px;
             font-size: 0.8rem;
-            color: var(--text-muted);
+            color: var(--text-sub);
         }
     </style>
 </head>
 <body>
 
-    <div class="content-container">
+    <div class="container">
 
-        <!-- STARTSEITE: BRIEFUMSCHLAG -->
-        <div class="hero-section">
-            <div class="envelope-container" id="envelope" onclick="openEnvelope()">
-                <div class="envelope-body"></div>
+        <!-- HERO UMSCHLAG -->
+        <div class="hero">
+            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+                <div class="envelope-back"></div>
+                <div class="card-inside">
+                    <p>Einladung zur Verlobung</p>
+                    <h3>Gülnur & Yasin</h3>
+                    <p style="color: var(--champagne); font-size: 0.65rem; margin-top: 8px;">November 2026</p>
+                </div>
                 <div class="envelope-pocket"></div>
                 <div class="envelope-flap"></div>
-                <div class="wax-seal"><span>G&Y</span></div>
-                
-                <div class="card-inside">
-                    <p style="font-size: 0.6rem; color: var(--gold-primary); margin-bottom: 4px;">Einladung zur</p>
-                    <h3>GÜLNUR & YASIN</h3>
-                    <p style="margin-top: 6px;">VERLOBUNG</p>
-                    <p style="font-size: 0.6rem; color: var(--gold-light); margin-top: 4px;">NOVEMBER 2026</p>
-                </div>
+                <div class="seal"><span>G&Y</span></div>
             </div>
-            <div class="scroll-hint">▼ Tippen oder Scrollen zum Öffnen ▼</div>
+            <div class="scroll-hint">▼ Tippen zum Öffnen ▼</div>
         </div>
 
-        <!-- 1. BEGRÜSSUNG -->
-        <section id="begruessung">
-            <h2>Hoş Geldiniz</h2>
-            <p style="margin-bottom: 8px; font-style: italic;">Herzlich Willkommen</p>
-            <p>Wir freuen uns riesig, diesen besonderen Moment unserer Verlobung mit unseren liebsten Menschen, unserer Familie und unseren Freunden teilen zu dürfen!</p>
-        </section>
-
-        <!-- 2. DATUM -->
-        <section id="datum">
-            <h2>Wann</h2>
-            <p class="gold-text" style="font-size: 1.3rem; font-family: 'Cinzel', serif;">November 2026</p>
-            <p style="margin-top: 6px; font-size: 0.8rem;">Das genaue Datum und die Uhrzeit geben wir in Kürze bekannt.</p>
-        </section>
-
-        <!-- 3. LOCATION MIT BILD -->
-        <section id="location">
-            <h2>Wo</h2>
-            <p class="gold-text" style="font-size: 1.05rem; margin-bottom: 6px;">Location Badbergen</p>
-            
-            <!-- BILD BEREICH (Greift auf IMG_9563.jpeg zu) -->
-            <div class="location-img-wrapper">
-                <img src="IMG_9563.jpeg" alt="Location Badbergen" class="location-img">
-            </div>
-
-            <p>Vortmannsweg 23<br>49635 Badbergen</p>
-            <a href="https://maps.app.goo.gl/hjnbZYpBbDfLeYTR6?g_st=ic" target="_blank" class="btn">📍 In Google Maps öffnen</a>
-        </section>
-
-        <!-- 4. GALERIE -->
-        <section id="galerie">
-            <h2>Impressionen</h2>
-            <div class="gallery-grid">
-                <div class="gallery-placeholder">Foto folgt...</div>
-                <div class="gallery-placeholder">Foto folgt...</div>
+        <!-- BEGRÜSSUNG -->
+        <section>
+            <div class="glass-card">
+                <h2>Hoş Geldiniz</h2>
+                <p style="font-style: italic; color: var(--champagne); font-size: 0.85rem; margin-bottom: 12px;">Herzlich Willkommen</p>
+                <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
             </div>
         </section>
 
-        <!-- 5. ZUSAGE (WHATSAPP) -->
-        <section id="rsvp" style="border: none;">
-            <h2>Rückmeldung</h2>
-            <p>Bitte gebt uns Bescheid, ob ihr diesen besonderen Tag mit uns feiert!</p>
-            <a href="https://wa.me/DEINE_NUMMER?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne%20zu%20eurer%20Verlobung!" target="_blank" class="btn" style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">💬 Per WhatsApp zusagen</a>
+        <!-- DATUM -->
+        <section>
+            <div class="glass-card">
+                <h2>Wann</h2>
+                <p class="highlight-text serif" style="font-size: 1.6rem;">November 2026</p>
+                <p style="font-size: 0.8rem; margin-top: 6px;">Das genaue Datum sowie die Uhrzeit folgen in Kürze.</p>
+            </div>
+        </section>
+
+        <!-- LOCATION -->
+        <section>
+            <div class="glass-card">
+                <h2>Wo</h2>
+                <p class="highlight-text" style="font-size: 1.1rem;">Location Badbergen</p>
+                
+                <div class="img-container">
+                    <img src="IMG_9563.JPG" 
+                         onerror="this.onerror=null; this.src='IMG_9563.jpg'; if(!this.src.includes('jpeg')) this.src='IMG_9563.jpeg';" 
+                         alt="Location Badbergen">
+                </div>
+
+                <p>Vortmannsweg 23<br>49635 Badbergen</p>
+                <a href="https://maps.app.goo.gl/hjnbZYpBbDfLeYTR6?g_st=ic" target="_blank" class="btn">📍 In Google Maps öffnen</a>
+            </div>
+        </section>
+
+        <!-- RSPS / WHATSAPP -->
+        <section>
+            <div class="glass-card">
+                <h2>Rückmeldung</h2>
+                <p>Wir bitten euch um eine kurze Rückmeldung, ob ihr diesen besonderen Moment mit uns teilt.</p>
+                <a href="https://wa.me/DEINE_NUMMER?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne%20zu%20eurer%20Verlobung!" target="_blank" class="btn btn-whatsapp">💬 Per WhatsApp zusagen</a>
+            </div>
         </section>
 
         <!-- FOOTER -->
         <footer>
-            <p>Wir freuen uns auf euch!</p>
-            <p class="gold-text" style="font-family: 'Cinzel', serif; font-size: 1.2rem; margin-top: 8px;">Gülnur & Yasin</p>
+            <p>Wir freuen uns auf euch</p>
+            <p class="serif highlight-text" style="font-size: 1.4rem; margin-top: 4px;">Gülnur & Yasin</p>
         </footer>
 
     </div>
 
     <script>
         let isOpen = false;
-
         function openEnvelope() {
             if (!isOpen) {
                 document.getElementById('envelope').classList.add('open');
@@ -393,7 +364,7 @@
         }
 
         window.addEventListener('scroll', function() {
-            if (window.scrollY > 15) {
+            if (window.scrollY > 10) {
                 openEnvelope();
             }
         });
