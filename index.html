@@ -7,66 +7,44 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --bg-dark: #0b0e14;
-            --card-bg: rgba(22, 27, 38, 0.75);
-            --champagne: #e2c391;
-            --champagne-light: #f4e6d0;
-            --champagne-gradient: linear-gradient(135deg, #f4e6d0 0%, #e2c391 50%, #b89358 100%);
-            --text-main: #f0f2f5;
-            --text-sub: #94a3b8;
-            --wax-red: linear-gradient(135deg, #8b1d1d 0%, #520c0c 100%);
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: #0b0e14;
+            color: #f0f2f5;
             font-family: 'Plus Jakarta Sans', sans-serif;
             text-align: center;
-            overflow-x: hidden;
-            line-height: 1.8;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(226, 195, 145, 0.08) 0%, transparent 70%),
-                radial-gradient(circle at 50% 100%, rgba(226, 195, 145, 0.05) 0%, transparent 70%);
-        }
-
-        h1, h2, h3, .serif {
-            font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 1.5px;
+            line-height: 1.6;
+            padding-bottom: 60px;
         }
 
         .container {
             max-width: 440px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 20px 20px;
         }
 
-        /* --- HERO & UMSCHLAG --- */
+        /* UMSCHLAG ANIMATION */
         .hero {
-            height: 100vh;
+            padding: 30px 0 10px 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            perspective: 1000px;
         }
 
         .envelope-wrapper {
             position: relative;
-            width: 290px;
-            height: 195px;
+            width: 280px;
+            height: 190px;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
         .envelope-back {
@@ -75,8 +53,8 @@
             height: 100%;
             background: #121721;
             border-radius: 12px;
-            border: 1px solid rgba(226, 195, 145, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(226, 195, 145, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
         }
 
         .card-inside {
@@ -84,31 +62,31 @@
             top: 8px;
             left: 12px;
             right: 12px;
-            height: 175px;
+            height: 170px;
             background: #181f2c;
-            border: 1px solid rgba(226, 195, 145, 0.4);
+            border: 1px solid rgba(226, 195, 145, 0.5);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.8s ease;
             z-index: 2;
-            padding: 20px;
+            padding: 15px;
         }
 
         .card-inside h3 {
-            font-size: 1.4rem;
-            color: var(--champagne);
-            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #e2c391;
+            margin: 5px 0;
         }
 
         .card-inside p {
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--text-sub);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: #94a3b8;
             text-transform: uppercase;
-            margin-top: 4px;
         }
 
         .envelope-pocket {
@@ -117,9 +95,9 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 145px solid #141a26;
-            border-right: 145px solid #141a26;
-            border-top: 95px solid transparent;
+            border-left: 140px solid #141a26;
+            border-right: 140px solid #141a26;
+            border-top: 90px solid transparent;
             border-bottom: 100px solid #1a2232;
             border-radius: 0 0 12px 12px;
             z-index: 3;
@@ -131,44 +109,180 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 145px solid transparent;
-            border-right: 145px solid transparent;
-            border-top: 110px solid #1c2536;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 105px solid #1c2536;
             transform-origin: top;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.7s ease;
             z-index: 4;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
         }
 
         .seal {
             position: absolute;
-            top: 82px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
             width: 48px;
             height: 48px;
-            background: var(--wax-red);
+            background: linear-gradient(135deg, #8b1d1d 0%, #520c0c 100%);
             border-radius: 50%;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 5;
-            border: 1px solid rgba(226, 195, 145, 0.3);
+            border: 1px solid rgba(226, 195, 145, 0.5);
             transition: all 0.5s ease;
         }
 
         .seal span {
             font-family: 'Cormorant Garamond', serif;
-            color: var(--champagne-light);
-            font-weight: 600;
-            font-size: 0.9rem;
+            color: #f4e6d0;
+            font-weight: 700;
+            font-size: 0.95rem;
         }
 
-        /* Open State Animation */
         .envelope-wrapper.open .envelope-flap {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
-        .envelope-wrapper.open .seal
+        .envelope-wrapper.open .seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.2);
+        }
+
+        .envelope-wrapper.open .card-inside {
+            transform: translateY(-80px);
+        }
+
+        /* INHALTS-BOXEN */
+        .card {
+            background: rgba(22, 27, 38, 0.85);
+            border: 1px solid rgba(226, 195, 145, 0.25);
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #e2c391;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .gold-text {
+            color: #e2c391;
+            font-weight: 600;
+        }
+
+        .img-container {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px 0;
+            border: 1px solid rgba(226, 195, 145, 0.3);
+            background: #151821;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f4e6d0 0%, #e2c391 50%, #b89358 100%);
+            color: #0d1117;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="hero">
+            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+                <div class="envelope-back"></div>
+                <div class="card-inside">
+                    <p>Einladung zur Verlobung</p>
+                    <h3>Gülnur & Yasin</h3>
+                    <p style="color: #e2c391; font-size: 0.65rem; margin-top: 6px;">November 2026</p>
+                </div>
+                <div class="envelope-pocket"></div>
+                <div class="envelope-flap"></div>
+                <div class="seal"><span>G&Y</span></div>
+            </div>
+            <p style="color: #e2c391; font-size: 0.75rem; letter-spacing: 2px; margin-top: 10px;">▼ TIPPEN ZUM ÖFFNEN ▼</p>
+        </div>
+
+        <div class="card">
+            <h2>Hoş Geldiniz</h2>
+            <p style="font-style: italic; color: #e2c391; font-size: 0.85rem; margin-bottom: 10px;">Herzlich Willkommen</p>
+            <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
+        </div>
+
+        <div class="card">
+            <h2>Wann</h2>
+            <p class="gold-text" style="font-size: 1.4rem; font-family: 'Cormorant Garamond', serif;">November 2026</p>
+            <p style="font-size: 0.85rem; margin-top: 4px;">Das genaue Datum geben wir in Kürze bekannt.</p>
+        </div>
+
+        <div class="card">
+            <h2>Wo</h2>
+            <p class="gold-text">Location Badbergen</p>
+            
+            <div class="img-container">
+                <img src="IMG_9563.JPG" 
+                     onerror="this.onerror=null; this.src='IMG_9563.jpg';" 
+                     alt="Location Badbergen">
+            </div>
+
+            <p>Vortmannsweg 23<br>49635 Badbergen</p>
+            <a href="https://maps.google.com/?q=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn">📍 In Google Maps öffnen</a>
+        </div>
+
+        <div class="card">
+            <h2>Rückmeldung</h2>
+            <p>Bitte gebt uns Bescheid, ob ihr dabei seid!</p>
+            <a href="https://wa.me/?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne!" target="_blank" class="btn btn-whatsapp">💬 Per WhatsApp zusagen</a>
+        </div>
+
+        <div style="padding: 20px 0; color: #94a3b8; font-size: 0.85rem;">
+            <p>Wir freuen uns auf euch</p>
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #e2c391; margin-top: 4px;">Gülnur & Yasin</p>
+        </div>
+
+    </div>
+
+    <script>
+        function openEnvelope() {
+            var env = document.getElementById('envelope');
+            if (env) {
+                env.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
