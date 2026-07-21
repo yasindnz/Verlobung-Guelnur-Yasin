@@ -69,7 +69,6 @@
             margin-top: 40px;
         }
 
-        /* Umschlag Hauptkörper */
         .envelope-body {
             position: absolute;
             width: 100%;
@@ -81,7 +80,6 @@
             overflow: hidden;
         }
 
-        /* Umschlag Innenseite Tasche */
         .envelope-pocket {
             position: absolute;
             bottom: 0;
@@ -96,7 +94,6 @@
             filter: drop-shadow(0 -2px 5px rgba(0,0,0,0.5));
         }
 
-        /* Umschlag Klappe oben */
         .envelope-flap {
             position: absolute;
             top: 0;
@@ -112,7 +109,6 @@
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
         }
 
-        /* Rotes Wachssiegel */
         .wax-seal {
             position: absolute;
             top: 85px;
@@ -140,7 +136,6 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
-        /* Karte im Umschlag */
         .card-inside {
             position: absolute;
             top: 10px;
@@ -175,7 +170,6 @@
             text-transform: uppercase;
         }
 
-        /* GEÖFFNETER ZUSTAND */
         .envelope-container.open .envelope-flap {
             transform: rotateX(180deg);
             z-index: 1;
@@ -190,7 +184,6 @@
             transform: translateY(-110px) scale(1.05);
         }
 
-        /* Scroll Hinweis */
         .scroll-hint {
             margin-top: 60px;
             color: var(--gold-primary);
@@ -206,7 +199,7 @@
         }
 
         /* ----------------------------------
-           CONTENT SECTIONS
+           CONTENT SECTIONS & LOCATION IMAGE
         ---------------------------------- */
         section {
             padding: 60px 0;
@@ -243,6 +236,26 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 600;
+        }
+
+        /* LOCATION IMAGE STYLES */
+        .location-img-wrapper {
+            margin: 20px 0 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .location-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .location-img-wrapper:hover .location-img {
+            transform: scale(1.03);
         }
 
         /* Buttons */
@@ -299,7 +312,7 @@
 
     <div class="content-container">
 
-        <!-- STARTSEITE: INTERAKTIVER BRIEFUMSCHLAG -->
+        <!-- STARTSEITE: BRIEFUMSCHLAG -->
         <div class="hero-section">
             <div class="envelope-container" id="envelope" onclick="openEnvelope()">
                 <div class="envelope-body"></div>
@@ -331,10 +344,16 @@
             <p style="margin-top: 6px; font-size: 0.8rem;">Das genaue Datum und die Uhrzeit geben wir in Kürze bekannt.</p>
         </section>
 
-        <!-- 3. LOCATION -->
+        <!-- 3. LOCATION MIT NEUEM BILD -->
         <section id="location">
             <h2>Wo</h2>
             <p class="gold-text" style="font-size: 1.05rem; margin-bottom: 6px;">Location Badbergen</p>
+            
+            <!-- BILD BEREICH -->
+            <div class="location-img-wrapper">
+                <img src="location.jpg" alt="Location Badbergen" class="location-img">
+            </div>
+
             <p>Vortmannsweg 23<br>49635 Badbergen</p>
             <a href="https://maps.app.goo.gl/hjnbZYpBbDfLeYTR6?g_st=ic" target="_blank" class="btn">📍 In Google Maps öffnen</a>
         </section>
@@ -363,7 +382,6 @@
 
     </div>
 
-    <!-- JAVASCRIPT FÜR DIE FLÜSSIGE ANIMATION -->
     <script>
         let isOpen = false;
 
@@ -374,7 +392,6 @@
             }
         }
 
-        // Öffnet den Umschlag automatisch beim leichten Scrollen
         window.addEventListener('scroll', function() {
             if (window.scrollY > 15) {
                 openEnvelope();
