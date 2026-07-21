@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verlobung - Gülnur & Yasin</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #1a1a1a;
+            --gold-primary: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-color: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --red-wax: #8b0000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Georgia', serif;
+            text-align: center;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .content-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 1. UMSCHLAG HERO SECTION */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background: #1f1f1f;
+            border: 1px solid var(--gold-primary);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+            cursor: pointer;
+            transition: transform 0.8s ease;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid #2a2a2a;
+            transform-origin: top;
+            transition: transform 0.6s ease 0.2s;
+            z-index: 3;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 65px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, #a71d1d, var(--red-wax));
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6), inset 0 0 5px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--gold-light);
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 4;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .card-inside {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            right: 15px;
+            bottom: 10px;
+            background: var(--card-bg);
+            border: 1px solid var(--gold-primary);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            transition: transform 0.8s ease 0.4s;
+            z-index: 2;
+        }
+
+        /* GEÖFFNETER ZUSTAND */
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5);
+        }
+
+        .envelope-wrapper.open .card-inside {
+            transform: translateY(-80px);
+        }
+
+        .scroll-hint {
+            margin-top: 40px;
+            color: var(--gold-primary);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        /* ABSCHNITTE */
+        section {
+            padding: 50px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        h2 {
+            color: var(--gold-primary);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .gold-text {
+            color: var(--gold-light);
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--gold-primary), #b38f2a);
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 120px;
+            background: #222;
+            border: 1px dashed var(--gold-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        footer {
+            padding: 30px 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+
+        <!-- UMSCHLAG (STARTSEITE) -->
+        <div class="hero-section">
+            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+                <div class="envelope-flap"></div>
+                <div class="wax-seal">G & Y</div>
+                <div class="card-inside">
+                    <p style="font-size: 0.8rem; color: var(--gold-primary); font-weight: bold;">GÜLNUR & YASIN</p>
+                    <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 5px;">VERLOBUNG</p>
+                    <p style="font-size: 0.6rem; color: var(--gold-light); margin-top: 3px;">NOVEMBER 2026</p>
+                </div>
+            </div>
+            <div class="scroll-hint">▼ Tippen oder Scrollen zum Öffnen ▼</div>
+        </div>
+
+        <!-- 1. BEGRÜSSUNG -->
+        <section id="begruessung">
+            <h2>Hoş Geldiniz / Herzlich Willkommen</h2>
+            <p>Wir freuen uns riesig, den besonderen Moment unserer Verlobung mit unseren liebsten Menschen, unserer Familie und unseren Freunden teilen zu dürfen!</p>
+        </section>
+
+        <!-- 2. DATUM -->
+        <section id="datum">
+            <h2>Wann</h2>
+            <p class="gold-text" style="font-size: 1.3rem;">November 2026</p>
+            <p style="margin-top: 5px; font-size: 0.85rem;">(Das genaue Datum und die Uhrzeit geben wir in Kürze bekannt)</p>
+        </section>
+
+        <!-- 3. LOCATION -->
+        <section id="location">
+            <h2>Wo</h2>
+            <p class="gold-text" style="font-size: 1.1rem; margin-bottom: 5px;">Location Badbergen</p>
+            <p>Vortmannsweg 23<br>49635 Badbergen</p>
+            <a href="https://maps.app.goo.gl/rijEr6EtmbKWE7UFA?g_st=ic" target="_blank" class="btn">📍 In Google Maps öffnen</a>
+        </section>
+
+        <!-- 4. GALERIE -->
+        <section id="galerie">
+            <h2>Impressionen</h2>
+            <div class="gallery-grid">
+                <div class="gallery-placeholder">Foto kommt...</div>
+                <div class="gallery-placeholder">Foto comes...</div>
+            </div>
+        </section>
+
+        <!-- 5. ZUSAGE (WHATSAPP) -->
+        <section id="rsvp">
+            <h2>Rückmeldung</h2>
+            <p>Bitte gebt uns Bescheid, ob ihr diesen besonderen Tag mit uns feiert!</p>
+            <!-- Sobald du die Nummer hast, ersetze DEINE_NUMMER durch z.B. 491701234567 -->
+            <a href="https://wa.me/DEINE_NUMMER?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne%20zu%20eurer%20Verlobung!" target="_blank" class="btn" style="background: #25D366; color: white;">💬 Per WhatsApp zusagen</a>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Wir freuen uns auf euch!</p>
+            <p style="color: var(--gold-primary); margin-top: 5px; font-size: 1.1rem;">Gülnur & Yasin</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function openEnvelope() {
+            document.getElementById('envelope').classList.add('open');
+        }
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 20) {
+                openEnvelope();
+            }
+        });
+    </script>
+</body>
+</html>
