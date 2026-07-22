@@ -7,15 +7,19 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-black: #060607;
+            --card-glass: rgba(18, 18, 20, 0.75);
+            --gold-light: #f7e7ce;
+            --gold-main: #d4af37;
             --gold-metallic: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
             --text-gold: #e2c286;
             --text-sub: #a1a1aa;
             --border-gold: rgba(212, 175, 55, 0.25);
+            --wax-red: linear-gradient(135deg, #8b1d1d 0%, #4a0707 100%);
         }
 
         * {
@@ -25,83 +29,189 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Am Anfang kein Scrollen erlauben */
-        body {
+        /* Am Anfang ist das Scrollen komplett deaktiviert */
+        html, body {
             background-color: var(--bg-black);
             color: #f4f4f5;
             font-family: 'Montserrat', sans-serif;
             text-align: center;
-            overflow: hidden; /* Wird nach Klick auf 'auto' gesetzt */
+            overflow: hidden;
             line-height: 1.8;
+            height: 100%;
         }
 
         .cinzel { font-family: 'Cinzel', serif; }
+        .garamond { font-family: 'Cormorant Garamond', serif; }
 
-        /* --- FULLSCREEN UMSCHLAG OVERLAY --- */
-        #envelope-overlay {
+        /* --- FULLSCREEN OVERLAY UMSCHLAG --- */
+        #envelope-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 9999;
             background-color: var(--bg-black);
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 80%);
+            z-index: 9999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: opacity 1s ease, visibility 1s ease, transform 1s ease;
+            perspective: 1200px;
+            transition: opacity 1s ease 0.6s, visibility 1s ease 0.6s;
         }
 
-        #envelope-overlay.opened {
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(1.08); /* Sanfter Zoom-Effekt beim Öffnen */
-            pointer-events: none;
+        .envelope-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--text-gold);
+            margin-bottom: 25px;
         }
 
-        /* Umschlag Bild als Hintergrund/Center */
-        .envelope-img-container {
+        .envelope-wrapper {
             position: relative;
+            width: 320px;
+            height: 210px;
+        }
+
+        .envelope-back {
+            position: absolute;
             width: 100%;
             height: 100%;
+            background: #111013;
+            border-radius: 12px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95);
+        }
+
+        .invitation-card {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            right: 12px;
+            height: 190px;
+            background: #18161a;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .invitation-card h3 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin: 6px 0;
+        }
+
+        .invitation-card p {
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            color: var(--text-gold);
+            text-transform: uppercase;
+        }
+
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid #141217;
+            border-right: 160px solid #141217;
+            border-top: 105px solid transparent;
+            border-bottom: 105px solid #1a181f;
+            border-radius: 0 0 12px 12px;
+            z-index: 3;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 115px solid #201d26;
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 4;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.7));
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 88px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 52px;
+            height: 52px;
+            background: var(--wax-red);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 5;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3);
+            transition: all 0.5s ease;
         }
 
-        .envelope-img-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
+        .wax-seal span {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Open State CSS */
+        #envelope-screen.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        #envelope-screen.open .wax-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.2);
+        }
+
+        #envelope-screen.open .invitation-card {
+            transform: translateY(-110px);
+        }
+
+        #envelope-screen.open {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .click-hint {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 45px;
             font-size: 0.75rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--text-gold);
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 30px;
-            border: 1px solid var(--border-gold);
-            backdrop-filter: blur(5px);
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
+            0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
         }
 
-        /* --- HAUPTINHALT (NACH DEM ÖFFNEN) --- */
+        /* --- HAUPTCONTENT --- */
         .main-content {
             opacity: 0;
-            transition: opacity 1.2s ease 0.3s;
+            transition: opacity 1.2s ease;
         }
 
         body.unlocked .main-content {
@@ -111,31 +221,22 @@
         .container {
             max-width: 440px;
             margin: 0 auto;
-            padding: 0 20px 80px 20px;
+            padding: 40px 20px 80px 20px;
         }
 
-        /* HAUPTBILD / COVER */
-        .cover-hero {
-            width: 100%;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
+        .header-title {
+            margin-bottom: 40px;
         }
 
-        .main-card-img {
-            width: 100%;
-            border-radius: 16px;
-            border: 1px solid var(--border-gold);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            margin-bottom: 25px;
+        .header-title h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            letter-spacing: 3px;
+            font-weight: 400;
         }
 
-        /* GLASS CARDS */
         .glass-card {
-            background: rgba(18, 18, 20, 0.75);
+            background: var(--card-glass);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-gold);
@@ -150,6 +251,7 @@
             font-weight: 400;
             color: var(--text-gold);
             margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         p {
@@ -170,6 +272,7 @@
             overflow: hidden;
             margin: 20px 0;
             border: 1px solid var(--border-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .img-wrapper img {
@@ -178,7 +281,7 @@
             display: block;
         }
 
-        /* BUTTONS */
+        /* BUTTONS (BEIDE BEIDE EDEL-GOLD) */
         .btn-stack {
             display: flex;
             flex-direction: column;
@@ -190,6 +293,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px;
             width: 100%;
             padding: 16px;
             border-radius: 30px;
@@ -198,6 +302,7 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .btn-gold {
@@ -209,10 +314,15 @@
         .btn-whatsapp {
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: #ffffff;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
         }
 
         footer {
-            margin-top: 40px;
+            margin-top: 50px;
             font-size: 0.8rem;
             color: var(--text-sub);
         }
@@ -226,46 +336,57 @@
 </head>
 <body>
 
-    <!-- 1. DIESES OVERLAY ZEIGT NUR DEN BRIEFUMSCHLAG -->
-    <div id="envelope-overlay" onclick="openInvitation()">
-        <div class="envelope-img-container">
-            <!-- Das Umschlag-Bild (z.B. umschlag.png) -->
-            <img src="umschlag.png" onerror="this.src='umschlag.jpg'" alt="Einladung Umschlag">
-            <div class="click-hint">Tippen zum Öffnen</div>
+    <!-- 1. INTRO FULLSCREEN UMSCHLAG (SPERRT DAS SCROLLEN) -->
+    <div id="envelope-screen" onclick="openEnvelope()">
+        <div class="envelope-subtitle cinzel">Einladung</div>
+        
+        <div class="envelope-wrapper">
+            <div class="envelope-back"></div>
+            <div class="invitation-card">
+                <p>Verlobung</p>
+                <h3 class="cinzel">Gülnur & Yasin</h3>
+                <p style="color: var(--text-gold); font-size: 0.6rem; margin-top: 6px;">November 2026</p>
+            </div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal"><span>G&Y</span></div>
         </div>
+
+        <div class="click-hint">▼ Tippen zum Öffnen ▼</div>
     </div>
 
-    <!-- 2. HAUPTINHALT (ERST NACH DEM KLICK SICHTBAR) -->
+    <!-- 2. HAUPTSEITE (ERST NACH DEM KLICK SCROLLBAR & SICHTBAR) -->
     <div class="main-content">
         <div class="container">
 
-            <!-- HAUPTKARTE (Das schöne Bild aus Instagram z.B.) -->
-            <div class="cover-hero">
-                <img src="einladung.png" onerror="this.src='einladung.jpg'" alt="Einladung Gülnur & Yasin" class="main-card-img">
-                <p style="font-size: 0.75rem; letter-spacing: 3px; color: var(--text-gold); text-transform: uppercase;">▼ Scrollen für Details ▼</p>
+            <div class="header-title">
+                <p style="font-size: 0.75rem; letter-spacing: 4px; color: var(--text-gold); text-transform: uppercase; margin-bottom: 5px;">Einladung zur Verlobung</p>
+                <h1 class="cinzel">GÜLNUR & YASIN</h1>
             </div>
 
             <!-- BEGRÜSSUNG -->
             <div class="glass-card">
                 <h2 class="cinzel">Hoş Geldiniz</h2>
-                <p style="font-style: italic; color: var(--text-gold); font-size: 1.1rem; margin-bottom: 12px;">Herzlich Willkommen</p>
+                <p class="garamond" style="font-style: italic; color: var(--text-gold); font-size: 1.1rem; margin-bottom: 12px;">Herzlich Willkommen</p>
                 <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
             </div>
 
             <!-- DATUM -->
             <div class="glass-card">
                 <h2 class="cinzel">Wann</h2>
-                <p class="highlight-text">November 2026</p>
+                <p class="highlight-text garamond">November 2026</p>
                 <p style="font-size: 0.8rem; margin-top: 6px;">Das genaue Datum sowie die Uhrzeit geben wir in Kürze bekannt.</p>
             </div>
 
             <!-- LOCATION -->
             <div class="glass-card">
                 <h2 class="cinzel">Wo</h2>
-                <p class="highlight-text">Location Badbergen</p>
+                <p class="highlight-text garamond">Location Badbergen</p>
                 
                 <div class="img-wrapper">
-                    <img src="IMG_9563.JPG" onerror="this.src='IMG_9563.jpg'" alt="Location Badbergen">
+                    <img src="IMG_9563.JPG" 
+                         onerror="this.onerror=null; this.src='IMG_9563.jpg'; if(!this.src.includes('jpeg')) this.src='IMG_9563.jpeg';" 
+                         alt="Location Badbergen">
                 </div>
 
                 <p>Vortmannsweg 23<br>49635 Badbergen</p>
@@ -289,6 +410,7 @@
                 </a>
             </div>
 
+            <!-- FOOTER -->
             <footer>
                 <p>Wir freuen uns auf euch</p>
                 <div class="names cinzel">Gülnur & Yasin</div>
@@ -298,13 +420,18 @@
     </div>
 
     <script>
-        function openInvitation() {
-            // Umschlag ausblenden
-            document.getElementById('envelope-overlay').classList.add('opened');
-            // Hauptseite freischalten
-            document.body.classList.add('unlocked');
-            // Scrollen aktivieren
-            document.body.style.overflow = 'auto';
+        function openEnvelope() {
+            var screen = document.getElementById('envelope-screen');
+            screen.classList.add('open');
+            
+            // Erst nach der Öffnungsanimation die Seite freischalten & Scrollen aktivieren
+            setTimeout(function() {
+                document.body.classList.add('unlocked');
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+                document.body.style.height = 'auto';
+                document.documentElement.style.height = 'auto';
+            }, 500);
         }
     </script>
 </body>
