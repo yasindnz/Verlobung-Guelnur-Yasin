@@ -13,14 +13,14 @@
     <style>
         :root {
             --bg-black: #060607;
-            --card-glass: rgba(18, 18, 20, 0.65);
+            --card-glass: rgba(18, 18, 20, 0.7);
             --gold-light: #f7e7ce;
             --gold-main: #d4af37;
-            --gold-gradient: linear-gradient(135deg, #fceabb 0%, #f8b500 50%, #c39738 100%);
-            --gold-metallic: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold-metallic: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
             --text-gold: #e2c286;
             --text-sub: #a1a1aa;
             --border-gold: rgba(212, 175, 55, 0.25);
+            --wax-red: linear-gradient(135deg, #8b1d1d 0%, #4a0707 100%);
         }
 
         * {
@@ -48,84 +48,168 @@
         .container {
             max-width: 440px;
             margin: 0 auto;
-            padding: 40px 20px 80px 20px;
+            padding: 0 20px 80px 20px;
         }
 
-        /* --- LUXUS HERO MONOGRAMM --- */
+        /* --- HERO SEKTION & BRIEFUMSCHLAG --- */
         .hero {
-            min-height: 85vh;
+            height: 95vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            perspective: 1200px;
             position: relative;
         }
 
-        .monogram-seal {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(18, 18, 20, 0.8);
-            border: 1px solid var(--border-gold);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.1);
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .monogram-seal::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 1px dashed rgba(212, 175, 55, 0.3);
-        }
-
-        .monogram-text {
-            font-size: 2.2rem;
-            background: var(--gold-metallic);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 500;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
+        .hero-subtitle {
             font-size: 0.7rem;
             letter-spacing: 5px;
             text-transform: uppercase;
             color: var(--text-gold);
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        .main-names {
-            font-size: 2.4rem;
-            font-weight: 400;
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111013;
+            border-radius: 10px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+        }
+
+        .invitation-card {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            right: 12px;
+            height: 180px;
+            background: #18161a;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .invitation-card h3 {
+            font-size: 1.5rem;
             color: #ffffff;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin: 4px 0;
         }
 
-        .date-badge {
-            display: inline-block;
-            padding: 6px 20px;
-            border-top: 1px solid var(--border-gold);
-            border-bottom: 1px solid var(--border-gold);
-            font-size: 0.75rem;
+        .invitation-card p {
+            font-size: 0.65rem;
             letter-spacing: 3px;
             color: var(--text-gold);
             text-transform: uppercase;
-            margin-top: 10px;
+        }
+
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid #141217;
+            border-right: 150px solid #141217;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid #1a181f;
+            border-radius: 0 0 10px 10px;
+            z-index: 3;
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid #201d26;
+            transform-origin: top;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 4;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--wax-red);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3);
+            transition: all 0.5s ease;
+        }
+
+        .wax-seal span {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* Umschlag Öffnen Animation */
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.3);
+        }
+
+        .envelope-wrapper.open .invitation-card {
+            transform: translateY(-90px);
+        }
+
+        .scroll-hint {
+            margin-top: 40px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-gold);
+            opacity: 0.8;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-5px); }
         }
 
         .divider {
             width: 40px;
             height: 1px;
             background: var(--gold-main);
-            margin: 40px auto;
+            margin: 20px auto 40px auto;
             opacity: 0.4;
         }
 
@@ -139,7 +223,6 @@
             padding: 35px 25px;
             margin-bottom: 30px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            position: relative;
         }
 
         h2 {
@@ -178,7 +261,7 @@
             display: block;
         }
 
-        /* BUTTONS (NAV & RSVP) */
+        /* BUTTONS (EINHEITLICHES EDEL-GOLD) */
         .btn-stack {
             display: flex;
             flex-direction: column;
@@ -195,7 +278,7 @@
             padding: 16px;
             border-radius: 30px;
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-decoration: none;
@@ -204,15 +287,8 @@
 
         .btn-gold {
             background: var(--gold-metallic);
-            color: #000;
-            font-weight: 600;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
-        }
-
-        .btn-outline {
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--gold-light);
-            border: 1px solid var(--border-gold);
+            color: #0c0a09;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.25);
         }
 
         .btn-whatsapp {
@@ -242,16 +318,23 @@
 
     <div class="container">
 
-        <!-- INTRO HERO -->
+        <!-- INTRO BRIEFUMSCHLAG -->
         <div class="hero">
-            <div class="monogram-seal">
-                <span class="monogram-text cinzel">G&Y</span>
+            <div class="hero-subtitle cinzel">Einladung</div>
+            
+            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+                <div class="envelope-back"></div>
+                <div class="invitation-card">
+                    <p>Verlobung</p>
+                    <h3 class="cinzel">Gülnur & Yasin</h3>
+                    <p style="color: var(--text-gold); font-size: 0.6rem; margin-top: 6px;">November 2026</p>
+                </div>
+                <div class="envelope-pocket"></div>
+                <div class="envelope-flap"></div>
+                <div class="wax-seal"><span>G&Y</span></div>
             </div>
-            
-            <div class="subtitle">Wir heiraten</div>
-            <h1 class="main-names cinzel">GÜLNUR<br>& YASIN</h1>
-            
-            <div class="date-badge">November 2026</div>
+
+            <div class="scroll-hint">▼ Tippen oder Scrollen zum Öffnen ▼</div>
         </div>
 
         <div class="divider"></div>
@@ -270,7 +353,7 @@
             <p style="font-size: 0.8rem; margin-top: 6px;">Das genaue Datum sowie die Uhrzeit geben wir in Kürze bekannt.</p>
         </div>
 
-        <!-- LOCATION -->
+        <!-- LOCATION & BEIDE GOLD-BUTTONS -->
         <div class="glass-card">
             <h2 class="cinzel">Wo</h2>
             <p class="highlight-text garamond">Location Badbergen</p>
@@ -287,7 +370,7 @@
                 <a href="https://maps.google.com/?q=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-gold">
                     📍 Google Maps
                 </a>
-                <a href="https://maps.apple.com/?address=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-outline">
+                <a href="https://maps.apple.com/?address=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-gold">
                     🍏 Apple Karten
                 </a>
             </div>
@@ -310,5 +393,22 @@
 
     </div>
 
+    <script>
+        let isOpen = false;
+
+        function openEnvelope() {
+            if (!isOpen) {
+                document.getElementById('envelope').classList.add('open');
+                isOpen = true;
+            }
+        }
+
+        // Automatisch öffnen beim leichten Scrollen
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 15) {
+                openEnvelope();
+            }
+        });
+    </script>
 </body>
 </html>
