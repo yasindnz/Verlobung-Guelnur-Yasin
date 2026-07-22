@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Verlobung — Gülnur & Yasin</title>
+    <title>Gülnur & Yasin — Verlobung</title>
     
+    <!-- Luxus Typografie -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-main: #0c0a09;
-            --surface-card: rgba(22, 19, 17, 0.75);
-            --border-light: rgba(229, 200, 159, 0.18);
-            --border-focus: rgba(229, 200, 159, 0.4);
-            --accent-gold: #e5c89f;
-            --accent-gold-light: #f5e6d0;
-            --gold-gradient: linear-gradient(135deg, #f5e6d0 0%, #e5c89f 50%, #b8986c 100%);
-            --text-primary: #f5f5f4;
-            --text-secondary: #a8a29e;
-            --wax-red: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+            --bg-black: #060607;
+            --card-glass: rgba(18, 18, 20, 0.65);
+            --gold-light: #f7e7ce;
+            --gold-main: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #fceabb 0%, #f8b500 50%, #c39738 100%);
+            --gold-metallic: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --text-gold: #e2c286;
+            --text-sub: #a1a1aa;
+            --border-gold: rgba(212, 175, 55, 0.25);
         }
 
         * {
@@ -30,152 +30,285 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-black);
+            color: #f4f4f5;
+            font-family: 'Montserrat', sans-serif;
             text-align: center;
-            line-height: 1.7;
             overflow-x: hidden;
+            line-height: 1.8;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(229, 200, 159, 0.07) 0%, transparent 60%),
-                radial-gradient(circle at 50% 100%, rgba(229, 200, 159, 0.04) 0%, transparent 60%);
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 70%),
+                radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
         }
 
-        .serif {
-            font-family: 'Playfair Display', serif;
-        }
+        .cinzel { font-family: 'Cinzel', serif; }
+        .garamond { font-family: 'Cormorant Garamond', serif; }
 
         .container {
-            max-width: 420px;
+            max-width: 440px;
             margin: 0 auto;
-            padding: 0 20px 80px 20px;
+            padding: 40px 20px 80px 20px;
         }
 
-        /* --- HERO & ELEGANT ENVELOPE --- */
-        .hero-section {
-            min-height: 90vh;
+        /* --- LUXUS HERO MONOGRAMM --- */
+        .hero {
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            perspective: 1200px;
-            padding-top: 20px;
-        }
-
-        .hero-title {
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            margin-bottom: 25px;
-            opacity: 0.9;
-        }
-
-        .envelope-container {
             position: relative;
-            width: 300px;
-            height: 200px;
-            cursor: pointer;
-            margin: 20px 0;
         }
 
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #151210;
-            border-radius: 8px;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.9);
-        }
-
-        .invitation-card {
-            position: absolute;
-            top: 10px;
-            left: 12px;
-            right: 12px;
-            height: 180px;
-            background: #1c1815;
-            border: 1px solid var(--border-focus);
-            border-radius: 6px;
+        .monogram-seal {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(18, 18, 20, 0.8);
+            border: 1px solid var(--border-gold);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 2;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 15px rgba(212, 175, 55, 0.1);
+            margin-bottom: 30px;
+            position: relative;
         }
 
-        .invitation-card h3 {
-            font-size: 1.5rem;
-            color: var(--accent-gold);
+        .monogram-seal::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+        }
+
+        .monogram-text {
+            font-size: 2.2rem;
+            background: var(--gold-metallic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--text-gold);
+            margin-bottom: 10px;
+        }
+
+        .main-names {
+            font-size: 2.4rem;
             font-weight: 400;
-            margin: 4px 0;
+            color: #ffffff;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .date-badge {
+            display: inline-block;
+            padding: 6px 20px;
+            border-top: 1px solid var(--border-gold);
+            border-bottom: 1px solid var(--border-gold);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: var(--text-gold);
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold-main);
+            margin: 40px auto;
+            opacity: 0.4;
+        }
+
+        /* --- GLASS CARDS --- */
+        .glass-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-gold);
+            border-radius: 20px;
+            padding: 35px 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--text-gold);
+            margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
-        .invitation-card p {
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
+        p {
+            color: var(--text-sub);
+            font-size: 0.9rem;
+            font-weight: 300;
         }
 
-        .envelope-pocket {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid #181412;
-            border-right: 150px solid #181412;
-            border-top: 100px solid transparent;
-            border-bottom: 100px solid #1f1a17;
-            border-radius: 0 0 8px 8px;
-            z-index: 3;
+        .highlight-text {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-top: 5px;
         }
 
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 110px solid #231e1a;
-            transform-origin: top;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 4;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+        /* LOCATION BILD */
+        .img-wrapper {
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .wax-seal {
-            position: absolute;
-            top: 85px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 48px;
-            height: 48px;
-            background: var(--wax-red);
-            border-radius: 50%;
+        .img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* BUTTONS (NAV & RSVP) */
+        .btn-stack {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            border: 1px solid rgba(229, 200, 159, 0.4);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.2);
-            transition: all 0.5s ease;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        .wax-seal span {
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-gold-light);
-            font-weight: 6
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 16px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold {
+            background: var(--gold-metallic);
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--gold-light);
+            border: 1px solid var(--border-gold);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #ffffff;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.2);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        footer .names {
+            font-size: 1.6rem;
+            color: var(--text-gold);
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- INTRO HERO -->
+        <div class="hero">
+            <div class="monogram-seal">
+                <span class="monogram-text cinzel">G&Y</span>
+            </div>
+            
+            <div class="subtitle">Wir heiraten</div>
+            <h1 class="main-names cinzel">GÜLNUR<br>& YASIN</h1>
+            
+            <div class="date-badge">November 2026</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- BEGRÜSSUNG -->
+        <div class="glass-card">
+            <h2 class="cinzel">Hoş Geldiniz</h2>
+            <p class="garamond" style="font-style: italic; color: var(--text-gold); font-size: 1.1rem; margin-bottom: 12px;">Herzlich Willkommen</p>
+            <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
+        </div>
+
+        <!-- DATUM -->
+        <div class="glass-card">
+            <h2 class="cinzel">Wann</h2>
+            <p class="highlight-text garamond">November 2026</p>
+            <p style="font-size: 0.8rem; margin-top: 6px;">Das genaue Datum sowie die Uhrzeit geben wir in Kürze bekannt.</p>
+        </div>
+
+        <!-- LOCATION -->
+        <div class="glass-card">
+            <h2 class="cinzel">Wo</h2>
+            <p class="highlight-text garamond">Location Badbergen</p>
+            
+            <div class="img-wrapper">
+                <img src="IMG_9563.JPG" 
+                     onerror="this.onerror=null; this.src='IMG_9563.jpg'; if(!this.src.includes('jpeg')) this.src='IMG_9563.jpeg';" 
+                     alt="Location Badbergen">
+            </div>
+
+            <p>Vortmannsweg 23<br>49635 Badbergen</p>
+
+            <div class="btn-stack">
+                <a href="https://maps.google.com/?q=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-gold">
+                    📍 Google Maps
+                </a>
+                <a href="https://maps.apple.com/?address=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-outline">
+                    🍏 Apple Karten
+                </a>
+            </div>
+        </div>
+
+        <!-- RSVP -->
+        <div class="glass-card">
+            <h2 class="cinzel">Rückmeldung</h2>
+            <p style="margin-bottom: 10px;">Bitte gebt uns Bescheid, ob ihr dabei seid!</p>
+            <a href="https://wa.me/?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne!" target="_blank" class="btn btn-whatsapp">
+                💬 Per WhatsApp zusagen
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Wir freuen uns auf euch</p>
+            <div class="names cinzel">Gülnur & Yasin</div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
