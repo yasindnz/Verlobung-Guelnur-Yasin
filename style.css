@@ -1,19 +1,30 @@
 /* =========================================
-   LUXURY VARIABLES & RESET
+   LIGHT LUXURY VARIABLES & RESET
 ========================================= */
 :root {
-    --color-bg: #050505;
-    --color-gold-main: #d4af37;
-    --color-gold-light: #f3e5ab;
-    --color-gold-dark: #aa7c11;
-    --color-cream: #fdfbf7;
-    --color-bordeaux: #4a0e17;
+    /* Helle, edle Hintergrundfarben (Büttenpapier-Look) */
+    --color-bg: #fbf9f6; 
+    --color-envelope-main: #f4f1ea;
+    --color-envelope-dark: #eae5df;
+    
+    /* Text & Akzente */
+    --color-text-main: #2c2c2c; /* Tiefes, weiches Dunkelgrau statt hartem Schwarz */
+    --color-text-muted: #5a5a5a;
+    
+    /* Gold-Töne für hellen Hintergrund angepasst (etwas kräftiger für Kontrast) */
+    --color-gold-main: #b8860b; 
+    --color-gold-light: #d4af37;
+    --color-gold-dark: #8b6508;
+    
+    /* Siegel */
+    --color-bordeaux: #6b1424;
     
     --font-serif: 'Cormorant Garamond', serif;
     --font-sans: 'Montserrat', sans-serif;
     
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(212, 175, 55, 0.15);
+    /* Glassmorphism für helle Themes */
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(184, 134, 11, 0.2);
 }
 
 * {
@@ -25,26 +36,26 @@
 
 body {
     background-color: var(--color-bg);
-    color: var(--color-cream);
+    color: var(--color-text-main);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    /* Verhindert Scrollen, bis der Umschlag offen ist */
-    overflow-y: hidden; 
+    overflow-y: hidden; /* Wird per JS freigeschaltet */
 }
 
 /* =========================================
-   PARTICLES (Goldstaub)
+   PARTICLES (Goldstaub auf hellem Grund)
 ========================================= */
 .particles-container {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
     pointer-events: none;
     z-index: 0;
-    background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+    /* Sanfter goldener Schimmer im Hintergrund */
+    background-image: radial-gradient(circle at 50% 50%, rgba(184, 134, 11, 0.04) 0%, transparent 70%);
 }
 
 /* =========================================
-   HERO 3D ENVELOPE
+   HERO 3D ENVELOPE (Helles Papier)
 ========================================= */
 .hero-envelope-screen {
     position: fixed;
@@ -58,7 +69,7 @@ body {
 }
 
 .envelope-scene {
-    perspective: 1200px; /* 3D Raum */
+    perspective: 1200px; 
     width: 320px;
     height: 220px;
     position: relative;
@@ -73,40 +84,39 @@ body {
     cursor: pointer;
 }
 
-/* Umschlag Bestandteile */
+/* Umschlag Bestandteile (Helles Papier mit Struktur) */
 .envelope-back, .envelope-pocket, .envelope-flap {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #111;
-    /* Papier-Struktur Illusion */
-    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
-    border: 1px solid var(--glass-border);
+    background-color: var(--color-envelope-main);
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
+    border: 1px solid rgba(0,0,0,0.05);
     border-radius: 4px;
 }
 
 .envelope-back {
     z-index: 1;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); /* Weicherer Schatten für helle Seite */
 }
 
+/* Die Karte selbst */
 .invitation-card {
     position: absolute;
     top: 5px; left: 10px; right: 10px; bottom: 5px;
-    background-color: var(--color-cream);
+    background-color: #ffffff; /* Reinweiß für Kontrast zum cremefarbenen Umschlag */
     border-radius: 4px;
     z-index: 2;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* Für den Drag später wichtig */
     touch-action: none; 
 }
 
 .card-content {
-    border: 1px solid var(--color-gold-main);
+    border: 1px solid rgba(184, 134, 11, 0.3); /* Feiner Goldrahmen */
     width: 90%; height: 90%;
     padding: 20px;
     display: flex;
@@ -115,14 +125,14 @@ body {
 }
 
 .card-content h2 {
-    color: var(--color-bg);
+    color: var(--color-text-main);
     font-family: var(--font-serif);
     font-size: 1.8rem;
     margin: 10px 0;
 }
 
 .card-content p {
-    color: var(--color-gold-dark);
+    color: var(--color-gold-main);
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -130,19 +140,21 @@ body {
 
 .envelope-pocket {
     z-index: 3;
-    /* Dreiecks-Schnitt für die vordere Tasche */
     clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
-    background: linear-gradient(to bottom, #151515, #0a0a0a);
+    background: linear-gradient(to bottom, var(--color-envelope-main), var(--color-envelope-dark));
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
 }
 
 .envelope-flap {
     z-index: 5;
     clip-path: polygon(0 0, 100% 0, 50% 65%);
-    background: #181818;
+    background: #fdfbf7;
     transform-origin: top;
     transition: transform 0.5s ease;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
 }
 
+/* Wachssiegel bleibt dunkelrot für den perfekten Luxus-Kontrast */
 .wax-seal {
     position: absolute;
     top: 55%; left: 50%;
@@ -154,29 +166,30 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.2);
     border: 1px solid rgba(212,175,55,0.4);
 }
 
 .wax-seal span {
     font-family: var(--font-serif);
-    color: var(--color-gold-light);
+    color: #f3e5ab;
     font-size: 1.2rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 /* Interaktions-Texte */
 .interaction-hint {
     position: absolute;
-    bottom: 15%;
+    bottom: 12%;
     width: 100%;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--color-gold-main);
     opacity: 0;
     pointer-events: none;
+    font-weight: 500;
 }
 
 .tap-hint {
@@ -185,7 +198,7 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { opacity: 0.5; }
+    0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
 }
 
@@ -224,15 +237,15 @@ body {
 .italic {
     font-family: var(--font-serif);
     font-style: italic;
-    color: var(--color-cream);
-    font-size: 1.2rem;
+    color: var(--color-text-main);
+    font-size: 1.3rem;
     margin-bottom: 20px;
 }
 
 .body-text {
     font-weight: 300;
     line-height: 1.8;
-    color: rgba(253, 251, 247, 0.8);
+    color: var(--color-text-muted);
     font-size: 0.95rem;
 }
 
@@ -244,6 +257,7 @@ body {
     text-transform: uppercase;
     color: var(--color-gold-main);
     margin-bottom: 20px;
+    font-weight: 500;
 }
 
 .huge-names {
@@ -253,11 +267,12 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 30px;
+    color: var(--color-text-main);
 }
 
 .huge-names .ampersand {
     font-size: 2.5rem;
-    color: var(--color-gold-main);
+    color: var(--color-gold-light);
     font-style: italic;
     margin: 10px 0;
 }
@@ -271,11 +286,12 @@ body {
     border-bottom: 1px solid var(--glass-border);
     padding: 15px 0;
     margin-bottom: 10px;
+    color: var(--color-text-main);
 }
 
 .sub-note {
     font-size: 0.7rem;
-    color: rgba(255,255,255,0.4);
+    color: var(--color-text-muted);
 }
 
 /* Countdown */
@@ -292,12 +308,13 @@ body {
     padding: 15px 10px;
     width: 70px;
     backdrop-filter: blur(10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
 }
 
 .time-block span {
     font-family: var(--font-serif);
     font-size: 1.8rem;
-    color: var(--color-gold-main);
+    color: var(--color-text-main);
     display: block;
 }
 
@@ -306,6 +323,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 5px;
+    color: var(--color-gold-dark);
 }
 
 /* Navigation Cards */
@@ -323,17 +341,19 @@ body {
     border-radius: 12px;
     padding: 20px 10px;
     text-decoration: none;
-    color: var(--color-cream);
+    color: var(--color-text-main);
     display: flex;
     flex-direction: column;
     align-items: center;
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
 }
 
 .map-card:hover {
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(184, 134, 11, 0.05);
     transform: translateY(-5px);
+    border-color: var(--color-gold-main);
 }
 
 .map-icon {
@@ -356,6 +376,7 @@ body {
     border: 1px solid var(--glass-border);
     border-radius: 16px;
     backdrop-filter: blur(15px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.04);
 }
 
 .rsvp-box {
@@ -364,9 +385,9 @@ body {
 
 .premium-btn {
     margin-top: 25px;
-    background: var(--color-bg);
-    color: var(--color-gold-main);
-    border: 1px solid var(--color-gold-main);
+    background: var(--color-gold-main);
+    color: #ffffff;
+    border: none;
     padding: 15px 30px;
     border-radius: 30px;
     font-family: var(--font-sans);
@@ -375,12 +396,14 @@ body {
     letter-spacing: 2px;
     cursor: pointer;
     transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(184, 134, 11, 0.3);
 }
 
 .premium-btn:hover {
-    background: var(--color-gold-main);
-    color: var(--color-bg);
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    background: var(--color-text-main);
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .footer {
@@ -388,7 +411,7 @@ body {
     padding: 40px 0;
     font-family: var(--font-serif);
     font-size: 1.2rem;
-    color: rgba(255,255,255,0.5);
+    color: var(--color-text-muted);
 }
 .heart { color: var(--color-bordeaux); }
 
