@@ -3,436 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gülnur & Yasin — Verlobung</title>
     
+    <!-- SEO & Open Graph Meta Tags (Optimiert für WhatsApp) -->
+    <title>Gülnur & Yasin — Verlobung</title>
+    <meta name="description" content="Wir laden euch herzlich zu unserer Verlobung ein.">
+    <meta property="og:title" content="Einladung zur Verlobung | Gülnur & Yasin">
+    <meta property="og:description" content="Wir freuen uns von Herzen darauf, diesen besonderen Tag gemeinsam mit unseren Liebsten zu feiern.">
+    <meta property="og:image" content="./assets/images/og-image.jpg"> <!-- WICHTIG: Hier später ein schönes Bild für WhatsApp einfügen -->
+    <meta property="og:type" content="website">
+    
+    <!-- Preconnect & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-black: #060607;
-            --card-glass: rgba(18, 18, 20, 0.75);
-            --gold-light: #f7e7ce;
-            --gold-main: #d4af37;
-            --gold-metallic: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
-            --text-gold: #e2c286;
-            --text-sub: #a1a1aa;
-            --border-gold: rgba(212, 175, 55, 0.25);
-            --wax-red: linear-gradient(135deg, #8b1d1d 0%, #4a0707 100%);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Am Anfang ist das Scrollen komplett deaktiviert */
-        html, body {
-            background-color: var(--bg-black);
-            color: #f4f4f5;
-            font-family: 'Montserrat', sans-serif;
-            text-align: center;
-            overflow: hidden;
-            line-height: 1.8;
-            height: 100%;
-        }
-
-        .cinzel { font-family: 'Cinzel', serif; }
-        .garamond { font-family: 'Cormorant Garamond', serif; }
-
-        /* --- FULLSCREEN OVERLAY UMSCHLAG --- */
-        #envelope-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: var(--bg-black);
-            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 80%);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            perspective: 1200px;
-            transition: opacity 1s ease 0.6s, visibility 1s ease 0.6s;
-        }
-
-        .envelope-subtitle {
-            font-size: 0.75rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--text-gold);
-            margin-bottom: 25px;
-        }
-
-        .envelope-wrapper {
-            position: relative;
-            width: 320px;
-            height: 210px;
-        }
-
-        .envelope-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #111013;
-            border-radius: 12px;
-            border: 1px solid var(--border-gold);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95);
-        }
-
-        .invitation-card {
-            position: absolute;
-            top: 10px;
-            left: 12px;
-            right: 12px;
-            height: 190px;
-            background: #18161a;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 2;
-            padding: 20px;
-        }
-
-        .invitation-card h3 {
-            font-size: 1.6rem;
-            color: #ffffff;
-            font-weight: 400;
-            letter-spacing: 2px;
-            margin: 6px 0;
-        }
-
-        .invitation-card p {
-            font-size: 0.65rem;
-            letter-spacing: 3px;
-            color: var(--text-gold);
-            text-transform: uppercase;
-        }
-
-        .envelope-pocket {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 160px solid #141217;
-            border-right: 160px solid #141217;
-            border-top: 105px solid transparent;
-            border-bottom: 105px solid #1a181f;
-            border-radius: 0 0 12px 12px;
-            z-index: 3;
-        }
-
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 160px solid transparent;
-            border-right: 160px solid transparent;
-            border-top: 115px solid #201d26;
-            transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 4;
-            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.7));
-        }
-
-        .wax-seal {
-            position: absolute;
-            top: 88px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 52px;
-            height: 52px;
-            background: var(--wax-red);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 5;
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.3);
-            transition: all 0.5s ease;
-        }
-
-        .wax-seal span {
-            font-family: 'Cinzel', serif;
-            color: var(--gold-light);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* Open State CSS */
-        #envelope-screen.open .envelope-flap {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
-
-        #envelope-screen.open .wax-seal {
-            opacity: 0;
-            transform: translateX(-50%) scale(0.2);
-        }
-
-        #envelope-screen.open .invitation-card {
-            transform: translateY(-110px);
-        }
-
-        #envelope-screen.open {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .click-hint {
-            margin-top: 45px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--text-gold);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        /* --- HAUPTCONTENT --- */
-        .main-content {
-            opacity: 0;
-            transition: opacity 1.2s ease;
-        }
-
-        body.unlocked .main-content {
-            opacity: 1;
-        }
-
-        .container {
-            max-width: 440px;
-            margin: 0 auto;
-            padding: 40px 20px 80px 20px;
-        }
-
-        .header-title {
-            margin-bottom: 40px;
-        }
-
-        .header-title h1 {
-            font-size: 2.2rem;
-            color: #ffffff;
-            letter-spacing: 3px;
-            font-weight: 400;
-        }
-
-        .glass-card {
-            background: var(--card-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-gold);
-            border-radius: 20px;
-            padding: 35px 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: var(--text-gold);
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        p {
-            color: var(--text-sub);
-            font-size: 0.9rem;
-            font-weight: 300;
-        }
-
-        .highlight-text {
-            font-size: 1.4rem;
-            color: #ffffff;
-            margin-top: 5px;
-        }
-
-        .img-wrapper {
-            width: 100%;
-            border-radius: 14px;
-            overflow: hidden;
-            margin: 20px 0;
-            border: 1px solid var(--border-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-
-        .img-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* BUTTONS (BEIDE BEIDE EDEL-GOLD) */
-        .btn-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 16px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-gold {
-            background: var(--gold-metallic);
-            color: #0c0a09;
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.25);
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: #ffffff;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.2);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        footer {
-            margin-top: 50px;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-        }
-
-        footer .names {
-            font-size: 1.6rem;
-            color: var(--text-gold);
-            margin-top: 8px;
-        }
-    </style>
+    <!-- Cormorant Garamond (Serif) & Montserrat (Sans-Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 1. INTRO FULLSCREEN UMSCHLAG (SPERRT DAS SCROLLEN) -->
-    <div id="envelope-screen" onclick="openEnvelope()">
-        <div class="envelope-subtitle cinzel">Einladung</div>
-        
-        <div class="envelope-wrapper">
-            <div class="envelope-back"></div>
-            <div class="invitation-card">
-                <p>Verlobung</p>
-                <h3 class="cinzel">Gülnur & Yasin</h3>
-                <p style="color: var(--text-gold); font-size: 0.6rem; margin-top: 6px;">November 2026</p>
-            </div>
-            <div class="envelope-pocket"></div>
-            <div class="envelope-flap"></div>
-            <div class="wax-seal"><span>G&Y</span></div>
-        </div>
+    <!-- Goldstaub Partikel Overlay -->
+    <div class="particles-container" id="particles"></div>
 
-        <div class="click-hint">▼ Tippen zum Öffnen ▼</div>
-    </div>
-
-    <!-- 2. HAUPTSEITE (ERST NACH DEM KLICK SCROLLBAR & SICHTBAR) -->
-    <div class="main-content">
-        <div class="container">
-
-            <div class="header-title">
-                <p style="font-size: 0.75rem; letter-spacing: 4px; color: var(--text-gold); text-transform: uppercase; margin-bottom: 5px;">Einladung zur Verlobung</p>
-                <h1 class="cinzel">GÜLNUR & YASIN</h1>
-            </div>
-
-            <!-- BEGRÜSSUNG -->
-            <div class="glass-card">
-                <h2 class="cinzel">Hoş Geldiniz</h2>
-                <p class="garamond" style="font-style: italic; color: var(--text-gold); font-size: 1.1rem; margin-bottom: 12px;">Herzlich Willkommen</p>
-                <p>Wir freuen uns von Herzen darauf, den besonderen Tag unserer Verlobung gemeinsam mit unseren Liebsten zu feiern.</p>
-            </div>
-
-            <!-- DATUM -->
-            <div class="glass-card">
-                <h2 class="cinzel">Wann</h2>
-                <p class="highlight-text garamond">November 2026</p>
-                <p style="font-size: 0.8rem; margin-top: 6px;">Das genaue Datum sowie die Uhrzeit geben wir in Kürze bekannt.</p>
-            </div>
-
-            <!-- LOCATION -->
-            <div class="glass-card">
-                <h2 class="cinzel">Wo</h2>
-                <p class="highlight-text garamond">Location Badbergen</p>
+    <!-- 1. HERO SEKTION: 3D UMSCHLAG (Fixed Fullscreen) -->
+    <section class="hero-envelope-screen" id="hero-screen">
+        <div class="envelope-scene">
+            <div class="envelope-wrapper">
+                <!-- Rückseite des Umschlags -->
+                <div class="envelope-back"></div>
                 
-                <div class="img-wrapper">
-                    <img src="IMG_9563.JPG" 
-                         onerror="this.onerror=null; this.src='IMG_9563.jpg'; if(!this.src.includes('jpeg')) this.src='IMG_9563.jpeg';" 
-                         alt="Location Badbergen">
+                <!-- Die eigentliche Karte (wird herausgezogen) -->
+                <div class="invitation-card">
+                    <div class="card-content">
+                        <p class="card-subtitle">Verlobung</p>
+                        <h2 class="card-title">Gülnur & Yasin</h2>
+                        <p class="card-date">November 2026</p>
+                        <!-- Platzhalter für edles Background-Image auf der Karte -->
+                        <!-- <img src="./assets/images/card-bg.jpg" alt="" class="card-bg-img"> -->
+                    </div>
                 </div>
 
-                <p>Vortmannsweg 23<br>49635 Badbergen</p>
-
-                <div class="btn-stack">
-                    <a href="https://maps.google.com/?q=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-gold">
-                        📍 Google Maps
-                    </a>
-                    <a href="https://maps.apple.com/?address=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="btn btn-gold">
-                        🍏 Apple Karten
-                    </a>
+                <!-- Vordere Tasche des Umschlags -->
+                <div class="envelope-pocket"></div>
+                
+                <!-- Obere Klappe -->
+                <div class="envelope-flap"></div>
+                
+                <!-- Wachssiegel -->
+                <div class="wax-seal">
+                    <span>G&Y</span>
                 </div>
             </div>
-
-            <!-- RSVP -->
-            <div class="glass-card">
-                <h2 class="cinzel">Rückmeldung</h2>
-                <p style="margin-bottom: 10px;">Bitte gebt uns Bescheid, ob ihr dabei seid!</p>
-                <a href="https://wa.me/?text=Hallo%20G%C3%BClnur%20und%20Yasin,%20ich%20komme%20sehr%20gerne!" target="_blank" class="btn btn-whatsapp">
-                    💬 Per WhatsApp zusagen
-                </a>
-            </div>
-
-            <!-- FOOTER -->
-            <footer>
-                <p>Wir freuen uns auf euch</p>
-                <div class="names cinzel">Gülnur & Yasin</div>
-            </footer>
-
         </div>
-    </div>
+        
+        <!-- Interaktions-Hinweise -->
+        <div class="interaction-hint tap-hint">Zum Öffnen tippen</div>
+        <div class="interaction-hint drag-hint">Ziehe die Einladung heraus</div>
+    </section>
 
-    <script>
-        function openEnvelope() {
-            var screen = document.getElementById('envelope-screen');
-            screen.classList.add('open');
-            
-            // Erst nach der Öffnungsanimation die Seite freischalten & Scrollen aktivieren
-            setTimeout(function() {
-                document.body.classList.add('unlocked');
-                document.body.style.overflow = 'auto';
-                document.documentElement.style.overflow = 'auto';
-                document.body.style.height = 'auto';
-                document.documentElement.style.height = 'auto';
-            }, 500);
-        }
-    </script>
+    <!-- 2. HAUPTWEBSEITE (Anfangs unsichtbar, Scrollen deaktiviert) -->
+    <main class="main-content" id="main-content">
+        
+        <section class="section welcome-section">
+            <div class="container">
+                <h1 class="split-text serif-gold">Hoş Geldiniz</h1>
+                <p class="subtitle italic">Herzlich Willkommen</p>
+                <p class="fade-up body-text max-w">
+                    Wir freuen uns von Herzen darauf,<br>
+                    diesen besonderen Tag gemeinsam<br>
+                    mit unseren Liebsten zu feiern.
+                </p>
+            </div>
+        </section>
+
+        <section class="section names-section">
+            <div class="container">
+                <p class="fade-up overline">Unsere Verlobung</p>
+                <h2 class="huge-names">
+                    <span class="name">Gülnur</span>
+                    <span class="ampersand">&</span>
+                    <span class="name">Yasin</span>
+                </h2>
+                <p class="fade-up date-highlight">November 2026</p>
+                <p class="fade-up sub-note">Das genaue Datum folgt.</p>
+            </div>
+        </section>
+
+        <!-- Countdown -->
+        <section class="section countdown-section">
+            <div class="container">
+                <div class="countdown-wrapper fade-up">
+                    <div class="time-block"><span id="cd-days">00</span><p>Tage</p></div>
+                    <div class="time-block"><span id="cd-hours">00</span><p>Stunden</p></div>
+                    <div class="time-block"><span id="cd-minutes">00</span><p>Minuten</p></div>
+                    <div class="time-block"><span id="cd-seconds">00</span><p>Sekunden</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location & Maps -->
+        <section class="section location-section">
+            <div class="container">
+                <h2 class="fade-up serif-gold">Location</h2>
+                <p class="fade-up body-text">
+                    Vortmannsweg 23<br>
+                    49635 Badbergen
+                </p>
+                
+                <div class="maps-container fade-up">
+                    <!-- Google Maps Card -->
+                    <a href="https://maps.google.com/?q=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="map-card glass">
+                        <div class="map-icon">G</div>
+                        <span>Google Maps</span>
+                    </a>
+                    <!-- Apple Maps Card -->
+                    <a href="https://maps.apple.com/?address=Vortmannsweg+23,+49635+Badbergen" target="_blank" class="map-card glass">
+                        <div class="map-icon">A</div>
+                        <span>Apple Karten</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section class="section rsvp-section">
+            <div class="container">
+                <div class="rsvp-box glass fade-up">
+                    <h2 class="serif-gold">RSVP</h2>
+                    <p class="body-text">
+                        Wir würden uns freuen,<br>
+                        diesen besonderen Moment<br>
+                        gemeinsam mit euch zu erleben.
+                    </p>
+                    <button id="whatsapp-btn" class="premium-btn">
+                        Per WhatsApp zusagen
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>Gülnur <span class="heart">♡</span> Yasin</p>
+        </footer>
+
+    </main>
+
+    <!-- Externe Premium Bibliotheken -->
+    <!-- GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP Draggable -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+    <!-- GSAP ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- SplitType (Für Text-Animationen) -->
+    <script src="https://unpkg.com/split-type"></script>
+    <!-- Lenis (Smooth Scroll) -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    
+    <!-- Lokales Script -->
+    <script src="script.js"></script>
 </body>
 </html>
